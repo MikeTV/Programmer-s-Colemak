@@ -18,3 +18,6 @@ Potential upcoming changes:
 - Find some way to put the ; symbol on the home row
 - Experiment with / in a different location so that HTML closing tags are less awkward -- low priority, since IDEs usually suggest closing tags upon pressing <
 - Find some useful function for modified capslock.  Enter, maybe?  Delete?  Just standard backspace?
+
+Non-layout TODOs:
+- Update keyboard layout images to match layout
