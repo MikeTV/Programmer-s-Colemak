@@ -1,0 +1,2 @@
+Need to install Run With UI Access option and use batch file or right-click and choose "Run with UI Access".
+Or modify the .ahk file to remove the SendPlay call.  Will lose the ability to press Up and Down in OneNote 2007.

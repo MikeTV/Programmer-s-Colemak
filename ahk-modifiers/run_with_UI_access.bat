@@ -1,0 +1,1 @@
+Start "" "%programfiles%\AutoHotKey\AutoHotkeyU64_UIA" modifiers.ahk
