@@ -48,6 +48,7 @@ Return
 ;5::
 ;6::
 *7::MyFunc("{Home}",0)
+*8::MyFunc("{Up}", 0)
 *9::MyFunc("{End}",0)
 *0::MyFunc("{PgUp}",0)
 
@@ -58,7 +59,7 @@ Return
 ;t::
 ;y::
 *u::MyFunc("{Left}",0)
-
+*i::MyFunc("{Down}", 0)
 *o::MyFunc("{Right}", 0)
 *p::MyFunc("{PgDn}",0)
 
@@ -81,37 +82,19 @@ Return
 ;n::
 ;m::
 
-	; Up and Down arrows require special treatment.  For some reason, OneNote only recognizes these keypresses if sent with SendPlay.
-	; However, sending arrow keypresses with SendPlay causes shift-{arrow} highlighting operations to be delayed a bit.
-	;FIXME: The following permanently modifies 8 and i keys to Up and Down.  Need to read up on AHK syntax.
-;	#IfWinExist ahk_exe ONENOTE.EXE    
-; 	{ 
-;		#IfWinActive ahk_exe ONENOTE.EXE
-;		{
-;			global HotkeysEnabled
-;			If(HotkeysEnabled)
-;			{
-;				
-				*8::MyFunc("{Up}", 1)
-				*i::MyFunc("{Down}", 1)
-;			}
-;		}
-;		#IfWinNotActive ahk_exe ONENOTE.EXE
-;		{
-;			global HotkeysEnabled
-;			If(HotkeysEnabled)
-;			{
-;				
-;				*8::MyFunc("{Up}", 0)
-;				*i::MyFunc("{Down}", 0)
-;			}
-;		}
-;	}
+				
 #If
 
 MyFunc(key, sendplay){
   global HotkeyPressed
   
+  ; Up and Down arrows require special treatment.  For some reason, OneNote only recognizes these keypresses if sent with SendPlay.
+  ; However, sending arrow keypresses with SendPlay causes shift-{arrow} highlighting operations to be delayed a bit, so limit it to OneNote.
+  if (WinActive("ahk_exe ONENOTE.EXE") && (key == "{Up}" || key == "{Down}"))
+  {
+	sendplay = true
+  }
+ 
   HotkeyPressed=true
   if(sendplay){ 
 	SendPlay {Blind}%key%
